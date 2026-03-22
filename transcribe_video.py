@@ -1,6 +1,6 @@
 import assemblyai as aai
 
-aai.settings.api_key = "9e70e69e110445b785532f1e919f683b"
+aai.settings.api_key = ""
 
 # For larger segments, use paragraphs instead
 def get_paragraph_segments(transcript):
@@ -38,7 +38,7 @@ def export_txt_with_speakers(segments, output_file="output_speakers.txt"):
            f.write(f"{start} --> {end}\n")
            f.write(f"[Speaker {segment['speaker']}]: {segment['text'].strip()}\n\n")
 
-audio_file = "../data/2018-1-26-memes-as-the-key-to-human-intelligence/q&a.m4a"
+audio_file = "../data/2018-1-7-daniel-dennett-charles-darwin-oration/q&a.m4a"
 config = aai.TranscriptionConfig(speech_models=["universal-3-pro", "universal-2"], language_detection=True, speaker_labels=True)
 
 transcript = aai.Transcriber(config=config).transcribe(audio_file)
