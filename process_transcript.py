@@ -151,7 +151,7 @@ for folder_name in video_folders:
         print("Error in file:", folder_name)
     if not type_line.startswith("Type of video:"):
         print("Error type_line in file:", folder_name)
-    video_data.type = type_line[15:]
+    video_data.type = type_line[15:-1]
     if video_data.type not in video_types:
         video_types.append(video_data.type)
 
@@ -160,7 +160,7 @@ for folder_name in video_folders:
         print("Error in file:", folder_name)
     if not topic_line.startswith("Topic:"):
         print("Error topic_line in file:", folder_name)
-    video_data.topic = topic_line[7:]
+    video_data.topic = topic_line[7:-1]
     if video_data.topic not in topics:
         topics.append(video_data.topic)
 
@@ -169,7 +169,7 @@ for folder_name in video_folders:
         print("Error in file:", folder_name)
     if not direct_audience_line.startswith("Direct audience:"):
         print("Error direct_audience_line in file:", folder_name)
-    video_data.direct_audience = direct_audience_line[17:]
+    video_data.direct_audience = direct_audience_line[17:-1]
     if video_data.direct_audience not in direct_audiences:
         direct_audiences.append(video_data.direct_audience)
 
@@ -178,7 +178,7 @@ for folder_name in video_folders:
         print("Error in file:", folder_name)
     if not other_audience_line.startswith("Other audience:"):
         print("Error other_audience_line in file:", folder_name)
-    video_data.other_audience = other_audience_line[16:]
+    video_data.other_audience = other_audience_line[16:-1]
     if video_data.other_audience not in indirect_audiences:
         indirect_audiences.append(video_data.other_audience)
 
@@ -209,11 +209,21 @@ for folder_name in video_folders:
                 if current_speaker == "Sam Harris":
                     if current_data_type not in video_data.data_harris:
                         video_data.data_harris[current_data_type] = ""
-                    video_data.data_harris[current_data_type] = video_data.data_harris[current_data_type] + line
+                    for token in line_tokens:
+                        if token.endswith('\n'):
+                            token = token[:-1]
+                        if token.endswith('.') or token.endswith(',') or token.endswith('-'):
+                            token = token[:-1]
+                        video_data.data_harris[current_data_type] = video_data.data_harris[current_data_type] + token + ' '
                 elif current_speaker == "Daniel Dennett":
                     if current_data_type not in video_data.data_dennett:
                         video_data.data_dennett[current_data_type] = ""
-                    video_data.data_dennett[current_data_type] = video_data.data_dennett[current_data_type] + line
+                    for token in line_tokens:
+                        if token.endswith('\n'):
+                            token = token[:-1]
+                        if token.endswith('.') or token.endswith(',') or token.endswith('-'):
+                            token = token[:-1]
+                        video_data.data_dennett[current_data_type] = video_data.data_dennett[current_data_type] + token + ' '
                 else:
                     print("Error, getting data before speaker name", line)
 
@@ -266,13 +276,6 @@ for folder_name in videos:
             counts_by_types_dennett[about_people] = 0
         counts_by_types_dennett[about_people] = counts_by_types_dennett[about_people] + len(videos[folder_name].data_dennett[about_people].split())
 
-        if about_people not in complete_data:
-            complete_data[about_people] = ""
-        complete_data[about_people] = complete_data[about_people] + "\n " + folder_name + ", Dennett: \n"
-        complete_data[about_people] = complete_data[about_people] + videos[folder_name].type + str(", ") + videos[folder_name].topic + str(", ")
-        complete_data[about_people] = complete_data[about_people] + videos[folder_name].direct_audience + str(", ") + videos[folder_name].other_audience + "\n"
-        complete_data[about_people] = complete_data[about_people] + videos[folder_name].data_dennett[about_people]
-
         if about_people not in data_for_analysis_dennett[year]:
             data_for_analysis_dennett[year][about_people] = ""
         data_for_analysis_dennett[year][about_people] = data_for_analysis_dennett[year][about_people] + videos[folder_name].data_dennett[about_people]
@@ -285,31 +288,9 @@ for folder_name in videos:
             counts_by_types_harris[about_people] = 0
         counts_by_types_harris[about_people] = counts_by_types_harris[about_people] + len(videos[folder_name].data_harris[about_people].split())
         
-        if about_people not in complete_data:
-            complete_data[about_people] = ""
-        complete_data[about_people] = complete_data[about_people] + "\n " + folder_name + ", Harris: \n"
-        complete_data[about_people] = complete_data[about_people] + videos[folder_name].type + str(", ") + videos[folder_name].topic + str(", ")
-        complete_data[about_people] = complete_data[about_people] + videos[folder_name].direct_audience + str(", ") + videos[folder_name].other_audience + "\n"
-        complete_data[about_people] = complete_data[about_people] + videos[folder_name].data_harris[about_people]
-
         if about_people not in data_for_analysis_harris[year]:
             data_for_analysis_harris[year][about_people] = ""
         data_for_analysis_harris[year][about_people] = data_for_analysis_harris[year][about_people] + videos[folder_name].data_harris[about_people]
-
-#print(len(complete_data))
-# for about_people in complete_data:
-#     with open(str(".\data_by_about_new\\") + about_people.group + str(about_people.is_positive) + about_people.specific_topic + str(about_people.is_judging) + ".txt", "a") as file:
-#         file.write(complete_data[about_people])
-
-
-#     for about_people in data_for_analysis_dennett:
-#         with open(str(".\data_for_emfd\\all_christians\\dennett\\") + about_people.group + str(about_people.is_positive) + about_people.specific_topic + str(about_people.is_judging) + ".txt", "a") as file:
-#             file.write(data_for_analysis_dennett[about_people])
-
-#     for about_people in data_for_analysis_Harris:
-#         with open(str(".\data_for_emfd\\harris\\") + about_people.group + str(about_people.is_positive) + about_people.specific_topic + str(about_people.is_judging) + ".txt", "a") as file:
-#             file.write(data_for_analysis_Harris[about_people])
-
 
 #(data_for_analysis_dennett, data_for_analysis_harris, groups, folder_name, should_be_positive, is_directly):
 #save_filtered_data(data_for_analysis_dennett, data_for_analysis_harris, all_christians, "about_all_christians_directly", True, True)
@@ -386,49 +367,25 @@ print("Indirect audiences:")
 for audience in indirect_audiences:
     print(audience)
 
-# print("Dennett:")
-# dennett_total = 0
-# for year in dennett_by_years:
-#     print(year, dennett_by_years[year])
-#     dennett_total = dennett_total + dennett_by_years[year]
-# print("dennett_total: ", dennett_total)
+# For statistics on type, audiences
 
-# print("Harris:")
-# harris_total = 0
-# for year in harris_by_years:
-#     print(year, harris_by_years[year])
-#     harris_total = harris_total + harris_by_years[year]
-# print("harris_total: ", harris_total)
+for folder_name in videos:
+    for data_segment_type in videos[folder_name].data_dennett:
+        year = videos[folder_name].date.year
+        video_type = videos[folder_name].type
+        direct_audience = videos[folder_name].direct_audience
+        other_audience = videos[folder_name].other_audience
+        segment_label = data_segment_type.group + "-" + str(data_segment_type.is_positive) + "-" + str(data_segment_type.is_judging)
+        label = str(year) + "-" + video_type + "-" + direct_audience + "-" + other_audience + "-" + segment_label
+        with open(str(".\data_for_statistics\\dennett\\") + str(label) + str(".txt"), "a") as file:
+            file.write(videos[folder_name].data_dennett[data_segment_type])
 
-
-
-# for file_name in file_names:
-#     file = open(file_name)
-#     speaker = ""
-#     lineNumber = 0
-#     while True:
-#         line = file.readline()
-#         lineNumber = lineNumber + 1
-#         if line.startswith('#'):
-#             if line.startswith('# DD') or line.startswith('# SH') or line.startswith('# Dawkins') or line.startswith('# Hitchens'):
-#                 print(line)
-#                 speaker = line[2:4]
-#             elif line != '#':
-#                 print("error on line number ", lineNumber, ", line: ", line)
-#             speaker = line[2:4]        
-#             continue
-#         elif re.match(r"\d\d:\d\d:\d\d", line) is not None:
-#             print(line)
-#         elif speaker == 'DD' or speaker == 'SH':
-#             print(line)
-
-
-#         if len(line) > 0 and line[0].isdigit() and re.match(r"\d\d:\d\d:\d\d", line) is None:
-#             print("error on line number ", lineNumber, ", line: ", line)
-#         if len(line) > 0 and not line[0].isdigit() and not line[0].isalpha() :
-#             print("error on line number ", lineNumber, ", line: ", line)
-
-#         if len(line) == 0:
-#             break
-
-#     file.close()
+    for data_segment_type in videos[folder_name].data_harris:
+        year = videos[folder_name].date.year
+        video_type = videos[folder_name].type
+        direct_audience = videos[folder_name].direct_audience
+        other_audience = videos[folder_name].other_audience
+        segment_label = data_segment_type.group + "-" + str(data_segment_type.is_positive) + "-" + str(data_segment_type.is_judging)
+        label = str(year) + "-" + video_type + "-" + direct_audience + "-" + other_audience + "-" + segment_label
+        with open(str(".\data_for_statistics\\harris\\") + str(label) + str(".txt"), "a") as file:
+            file.write(videos[folder_name].data_harris[data_segment_type])
