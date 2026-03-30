@@ -74,7 +74,7 @@ class VideoData:
 
 
 all_christians = ['About Christian fundamentalists', 'About Christians', 'About Christian theologians', 'About Christian preachers', 'About moderate Christians']
-all_non_religious = ['About atheists', 'About secular people', 'About non-religious people', 'About scientists, secularists and atheists', 'About Christian preachers - atheists']
+all_non_religious = ['About atheists', 'About secular people', 'About nonreligious people', 'About scientists, secularists and atheists', 'About Christian preachers atheists']
 all_scientists = ['About scientists', 'About scientists, secularists and atheists']
 all_muslims = ['About Muslims', 'About moderate Muslims', 'About Muslim fundamentalists']
 all_religious_people_in_general = ['About religious people', 'About religious fundamentalists', 'About religious moderates']
