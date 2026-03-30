@@ -212,6 +212,8 @@ for folder_name in video_folders:
                     for token in line_tokens:
                         if token.endswith('\n'):
                             token = token[:-1]
+                        if token.endswith('\"'):
+                            token = token[:-1]
                         if token.endswith('.') or token.endswith(',') or token.endswith('-'):
                             token = token[:-1]
                         print(token)
@@ -221,6 +223,8 @@ for folder_name in video_folders:
                         video_data.data_dennett[current_data_type] = ""
                     for token in line_tokens:
                         if token.endswith('\n'):
+                            token = token[:-1]
+                        if token.endswith('\"'):
                             token = token[:-1]
                         if token.endswith('.') or token.endswith(',') or token.endswith('-'):
                             token = token[:-1]
