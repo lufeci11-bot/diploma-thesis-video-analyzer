@@ -191,7 +191,7 @@ for folder_name in video_folders:
         line = file.readline()
         if not line:
             break
-        line_tokens = line.split(' ', 1)
+        line_tokens = line.split(' ')
         if len(line_tokens) > 0:
             if line[0] == '#':
                 if len(line_tokens) > 1:
@@ -214,6 +214,7 @@ for folder_name in video_folders:
                             token = token[:-1]
                         if token.endswith('.') or token.endswith(',') or token.endswith('-'):
                             token = token[:-1]
+                        print(token)
                         video_data.data_harris[current_data_type] = video_data.data_harris[current_data_type] + token + ' '
                 elif current_speaker == "Daniel Dennett":
                     if current_data_type not in video_data.data_dennett:
@@ -223,6 +224,7 @@ for folder_name in video_folders:
                             token = token[:-1]
                         if token.endswith('.') or token.endswith(',') or token.endswith('-'):
                             token = token[:-1]
+                        print(token)
                         video_data.data_dennett[current_data_type] = video_data.data_dennett[current_data_type] + token + ' '
                 else:
                     print("Error, getting data before speaker name", line)
