@@ -395,3 +395,20 @@ for folder_name in videos:
         label = str(year) + "-" + video_type + "-" + direct_audience + "-" + other_audience + "-" + segment_label
         with open(str(".\data_for_statistics\\harris\\") + str(label) + str(".txt"), "a") as file:
             file.write(videos[folder_name].data_harris[data_segment_type])
+
+
+#Excel filters - direct comparison
+# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About Christians")+(E2:E162="About Christian fundamentalists")+(E2:E162="About Christian preachers")))
+# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About moderate Christians")+(E2:E162="About Christian theologians")))
+
+# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About atheists")+(E2:E162="About nonreligious people")+(E2:E162="About Christian preachers atheists")))
+# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About scientists, secularists and atheists")+(E2:E162="About secular people")))
+# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About Christian preachers atheists")))
+
+#Excel filters - all comparison
+# =FILTER(E2:Q162, (E2:E162="About Christians")+(E2:E162="About Christian fundamentalists")+(E2:E162="About Christian preachers"))
+# =FILTER(E2:Q162, (E2:E162="About moderate Christians")+(E2:E162="About Christian theologians"))
+
+# =FILTER(E2:Q162, (E2:E162="About atheists")+(E2:E162="About nonreligious people")+(E2:E162="About Christian preachers atheists"))
+# =FILTER(E2:Q162, (E2:E162="About scientists, secularists and atheists")+(E2:E162="About secular people"))
+# =FILTER(E2:Q162, (E2:E162="About Christian preachers atheists"))
