@@ -406,9 +406,33 @@ for folder_name in videos:
 # =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About Christian preachers atheists")))
 
 #Excel filters - all comparison
+# All Christians
 # =FILTER(E2:Q162, (E2:E162="About Christians")+(E2:E162="About Christian fundamentalists")+(E2:E162="About Christian preachers"))
 # =FILTER(E2:Q162, (E2:E162="About moderate Christians")+(E2:E162="About Christian theologians"))
 
+# All Atheists
 # =FILTER(E2:Q162, (E2:E162="About atheists")+(E2:E162="About nonreligious people")+(E2:E162="About Christian preachers atheists"))
 # =FILTER(E2:Q162, (E2:E162="About scientists, secularists and atheists")+(E2:E162="About secular people"))
 # =FILTER(E2:Q162, (E2:E162="About Christian preachers atheists"))
+
+#Scientists
+# Scientists
+# =FILTER(E2:Q162, (E2:E162="About scientists"))
+
+#Excel filters - all comparison
+# Christians commoners
+# =FILTER(E2:Q162, (E2:E162="About moderate Christians")+(E2:E162="About Christians")+(E2:E162="About Christian fundamentalists")+(E2:E162="About Christian preachers"))
+# Christian theologians
+# =FILTER(E2:Q162, (E2:E162="About Christian theologians"))
+
+# Other religious groups
+# =FILTER(E2:Q162, (E2:E162="About Muslims")+(E2:E162="About moderate Muslims")+(E2:E162="About Muslim fundamentalists")+(E2:E162="About other religious people"))
+#
+# Filter Muslims
+# =FILTER(E2:Q162, (E2:E162="About Muslims")+(E2:E162="About moderate Muslims")+(E2:E162="About Muslim fundamentalists"))
+
+# Filter all religious people
+# =FILTER(E2:Q162, (E2:E162="About Christians")+(E2:E162="About Christian fundamentalists")+(E2:E162="About Christian preachers"))
+# =FILTER(E2:Q162, (E2:E162="About moderate Christians")+(E2:E162="About Christian theologians"))
+# =FILTER(E2:Q162, (E2:E162="About Muslims")+(E2:E162="About moderate Muslims")+(E2:E162="About Muslim fundamentalists")+(E2:E162="About other religious people"))
+# =FILTER(E2:Q162, (E2:E162="About religious people")+(E2:E162="About religious fundamentalists")+(E2:E162="About religious moderates"))
