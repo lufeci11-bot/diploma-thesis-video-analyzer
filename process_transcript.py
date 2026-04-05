@@ -398,41 +398,158 @@ for folder_name in videos:
 
 
 #Excel filters - direct comparison
-# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About Christians")+(E2:E162="About Christian fundamentalists")+(E2:E162="About Christian preachers")))
-# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About moderate Christians")+(E2:E162="About Christian theologians")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About moderate Christians")+(E2:E212="About Christian theologians")))
 
-# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About atheists")+(E2:E162="About nonreligious people")+(E2:E162="About Christian preachers atheists")))
-# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About scientists, secularists and atheists")+(E2:E162="About secular people")))
-# =FILTER(E2:Q162, (G2:G162=TRUE)*((E2:E162="About Christian preachers atheists")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Christian preachers atheists")))
 
 #Excel filters - all comparison
 # All Christians
-# =FILTER(E2:Q162, (E2:E162="About Christians")+(E2:E162="About Christian fundamentalists")+(E2:E162="About Christian preachers"))
-# =FILTER(E2:Q162, (E2:E162="About moderate Christians")+(E2:E162="About Christian theologians"))
+# =FILTER(E2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
 
 # All Atheists
-# =FILTER(E2:Q162, (E2:E162="About atheists")+(E2:E162="About nonreligious people")+(E2:E162="About Christian preachers atheists"))
-# =FILTER(E2:Q162, (E2:E162="About scientists, secularists and atheists")+(E2:E162="About secular people"))
-# =FILTER(E2:Q162, (E2:E162="About Christian preachers atheists"))
+# =FILTER(E2:Q212, (E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists"))
+# =FILTER(E2:Q212, (E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people"))
+# =FILTER(E2:Q212, (E2:E212="About Christian preachers atheists"))
 
 #Scientists
 # Scientists
-# =FILTER(E2:Q162, (E2:E162="About scientists"))
+# =FILTER(E2:Q212, (E2:E212="About scientists"))
 
 #Excel filters - all comparison
 # Christians commoners
-# =FILTER(E2:Q162, (E2:E162="About moderate Christians")+(E2:E162="About Christians")+(E2:E162="About Christian fundamentalists")+(E2:E162="About Christian preachers"))
+# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
 # Christian theologians
-# =FILTER(E2:Q162, (E2:E162="About Christian theologians"))
+# =FILTER(E2:Q212, (E2:E212="About Christian theologians"))
 
 # Other religious groups
-# =FILTER(E2:Q162, (E2:E162="About Muslims")+(E2:E162="About moderate Muslims")+(E2:E162="About Muslim fundamentalists")+(E2:E162="About other religious people"))
+# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people"))
 #
 # Filter Muslims
-# =FILTER(E2:Q162, (E2:E162="About Muslims")+(E2:E162="About moderate Muslims")+(E2:E162="About Muslim fundamentalists"))
+# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists"))
 
 # Filter all religious people
-# =FILTER(E2:Q162, (E2:E162="About Christians")+(E2:E162="About Christian fundamentalists")+(E2:E162="About Christian preachers"))
-# =FILTER(E2:Q162, (E2:E162="About moderate Christians")+(E2:E162="About Christian theologians"))
-# =FILTER(E2:Q162, (E2:E162="About Muslims")+(E2:E162="About moderate Muslims")+(E2:E162="About Muslim fundamentalists")+(E2:E162="About other religious people"))
-# =FILTER(E2:Q162, (E2:E162="About religious people")+(E2:E162="About religious fundamentalists")+(E2:E162="About religious moderates"))
+# =FILTER(E2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people"))
+# =FILTER(E2:Q212, (E2:E212="About religious people")+(E2:E212="About religious fundamentalists")+(E2:E212="About religious moderates"))
+
+# Filter all religious people direct
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About moderate Christians")+(E2:E212="About Christian theologians")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About religious people")+(E2:E212="About religious fundamentalists")+(E2:E212="About religious moderates")))
+
+# Religious fundamentalists
+# =FILTER(E2:Q212, (E2:E212="About religious fundamentalists")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Muslim fundamentalists"))
+
+# Religious moderates
+# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About moderate Muslims")+(E2:E212="About religious moderates"))
+
+# All the Christians for anova
+# =FILTER(A2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# =FILTER(A2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+
+# All the atheists for anova
+# =FILTER(A2:Q212, (E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists"))
+# =FILTER(A2:Q212, (E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people"))
+
+# All the religious people for anova
+# =FILTER(A2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# =FILTER(A2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+# =FILTER(A2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people"))
+# =FILTER(A2:Q212, (E2:E212="About religious people")+(E2:E212="About religious fundamentalists")+(E2:E212="About religious moderates"))
+
+# scientists for anova
+# =FILTER(A2:Q212, (E2:E212="About scientists"))
+
+# Direct Christians for anova
+# =FILTER(A2:Q212, (G2:G212=TRUE)*((E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers")))
+# =FILTER(A2:Q212, (G2:G212=TRUE)*((E2:E212="About moderate Christians")+(E2:E212="About Christian theologians")))
+
+
+#For Harris
+
+#Excel filters - direct comparison
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About moderate Christians")+(E2:E212="About Christian theologians")))
+
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Christian preachers atheists")))
+
+#Excel filters - all comparison
+# All Christians
+# =FILTER(E2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+
+# All Atheists
+# =FILTER(E2:Q212, (E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists"))
+# =FILTER(E2:Q212, (E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people"))
+# =FILTER(E2:Q212, (E2:E212="About Christian preachers atheists"))
+
+#Scientists
+# Scientists
+# =FILTER(E2:Q212, (E2:E212="About scientists"))
+
+#Excel filters - all comparison
+# Christians commoners
+# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# Christian theologians
+# =FILTER(E2:Q212, (E2:E212="About Christian theologians"))
+
+# Other religious groups
+# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people"))
+#
+# Filter Muslims
+# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists"))
+
+# Filter all religious people
+# =FILTER(E2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people"))
+# =FILTER(E2:Q212, (E2:E212="About religious people")+(E2:E212="About religious fundamentalists")+(E2:E212="About religious moderates"))
+
+# Filter all religious people direct
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About moderate Christians")+(E2:E212="About Christian theologians")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people")))
+# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About religious people")+(E2:E212="About religious fundamentalists")+(E2:E212="About religious moderates")))
+
+# Religious fundamentalists
+# =FILTER(E2:Q212, (E2:E212="About religious fundamentalists")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Muslim fundamentalists"))
+# Christian fundamentalists
+# =FILTER(E2:Q212, (E2:E212="About Christian fundamentalists"))
+# The rest of Christians
+# =FILTER(E2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian preachers"))
+# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+# The rest of all relgious
+# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About other religious people"))
+# =FILTER(E2:Q212, (E2:E212="About religious people")+(E2:E212="About religious moderates"))
+
+# Religious moderates
+# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About moderate Muslims")+(E2:E212="About religious moderates"))
+
+# All the Christians for anova
+# =FILTER(A2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# =FILTER(A2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+
+# All the atheists for anova
+# =FILTER(A2:Q212, (E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists"))
+# =FILTER(A2:Q212, (E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people"))
+
+# All the religious people for anova
+# =FILTER(A2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# =FILTER(A2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+# =FILTER(A2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people"))
+# =FILTER(A2:Q212, (E2:E212="About religious people")+(E2:E212="About religious fundamentalists")+(E2:E212="About religious moderates"))
+
+# scientists for anova
+# =FILTER(A2:Q212, (E2:E212="About scientists"))
+
+# Direct Christians for anova
+# =FILTER(A2:Q212, (G2:G212=TRUE)*((E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers")))
+# =FILTER(A2:Q212, (G2:G212=TRUE)*((E2:E212="About moderate Christians")+(E2:E212="About Christian theologians")))
