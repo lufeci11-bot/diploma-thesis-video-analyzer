@@ -1,6 +1,9 @@
 import re
 import os
 from datetime import datetime
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
 
 def list_files_recursive(path='.'):
     for entry in os.listdir(path):
@@ -216,7 +219,7 @@ for folder_name in video_folders:
                             token = token[:-1]
                         if token.endswith('.') or token.endswith(',') or token.endswith('-'):
                             token = token[:-1]
-                        print(token)
+                        #print(token)
                         video_data.data_harris[current_data_type] = video_data.data_harris[current_data_type] + token + ' '
                 elif current_speaker == "Daniel Dennett":
                     if current_data_type not in video_data.data_dennett:
@@ -228,7 +231,7 @@ for folder_name in video_folders:
                             token = token[:-1]
                         if token.endswith('.') or token.endswith(',') or token.endswith('-'):
                             token = token[:-1]
-                        print(token)
+                        #print(token)
                         video_data.data_dennett[current_data_type] = video_data.data_dennett[current_data_type] + token + ' '
                 else:
                     print("Error, getting data before speaker name", line)
@@ -272,6 +275,7 @@ complete_data = dict()
 data_for_analysis_dennett = dict()
 data_for_analysis_harris = dict()
 for folder_name in videos:
+    print(folder_name)
     print(videos[folder_name].url)
     year = videos[folder_name].date.year
     if len(videos[folder_name].data_dennett) > 0 and year not in data_for_analysis_dennett:
@@ -297,6 +301,80 @@ for folder_name in videos:
         if about_people not in data_for_analysis_harris[year]:
             data_for_analysis_harris[year][about_people] = ""
         data_for_analysis_harris[year][about_people] = data_for_analysis_harris[year][about_people] + videos[folder_name].data_harris[about_people]
+
+# # Years charts
+# years = range(2003, 2027)
+
+# total_by_years_dennett = dict()
+# for year in years:
+#     total_by_years_dennett[year] = 0
+
+# for year in data_for_analysis_dennett:
+#     for about in data_for_analysis_dennett[year]:
+#         tokens = data_for_analysis_dennett[year][about].split(' ')
+#         total_by_years_dennett[year] = total_by_years_dennett[year] + len(tokens)
+    
+# for year in years:
+#     print(year, "dennett", total_by_years_dennett[year])
+
+# total_by_years_harris = dict()
+# for year in years:
+#     total_by_years_harris[year] = 0
+# for year in data_for_analysis_harris:
+#     for about in data_for_analysis_harris[year]:
+#         tokens = data_for_analysis_harris[year][about].split(' ')
+#         total_by_years_harris[year] = total_by_years_harris[year] + len(tokens)
+
+# for year in years:
+#     print(year, "harris", total_by_years_harris[year])
+
+# #plt.bar(total_by_years.keys(), total_by_years.values(), 1, color='g')
+
+# df = pd.DataFrame({'Year': years, 'Dennett': total_by_years_dennett.values(), 'Harris': total_by_years_harris.values()})
+
+# df.plot(x="Year", y=["Dennett", "Harris"], kind="bar")
+# plt.ylabel("Words"); 
+# plt.show()
+
+# # Religious groups charts
+# print("Groups: ", religious_groups)
+
+# religious_groups= ['About Christians', 'About Christian fundamentalists', 'About moderate Christians', 'About Christian preachers', 'About Christian theologians', \
+# 'About atheists', 'About nonreligious people', 'About secular people', 'About scientists, secularists and atheists', 'About scientists', 'About Christian preachers atheists', \
+# 'About Muslims', 'About Muslim fundamentalists', 'About moderate Muslims', 'About other religious people', 'About religious people', 'About religious fundamentalists', 'About religious moderates']
+
+# total_by_groups_dennett = dict()
+# for group in religious_groups:
+#     total_by_groups_dennett[group[6:]] = 0
+
+# for year in data_for_analysis_dennett:
+#     for about in data_for_analysis_dennett[year]:
+#         tokens = data_for_analysis_dennett[year][about].split(' ')
+#         print(year, about.group)
+#         total_by_groups_dennett[about.group[6:]] = total_by_groups_dennett[about.group[6:]] + len(tokens)
+    
+# for group in total_by_groups_dennett:
+#     print(group, "dennett", total_by_groups_dennett[group])
+
+# total_by_groups_harris = dict()
+# for group in religious_groups:
+#     total_by_groups_harris[group[6:]] = 0
+
+# for year in data_for_analysis_harris:
+#     for about in data_for_analysis_harris[year]:
+#         tokens = data_for_analysis_harris[year][about].split(' ')
+#         total_by_groups_harris[about.group[6:]] = total_by_groups_harris[about.group[6:]] + len(tokens)
+    
+# for group in total_by_groups_harris:
+#     print(group, "harris", total_by_groups_harris[group])
+
+# print(len(religious_groups), len(total_by_groups_dennett), len(total_by_groups_harris))
+
+# df = pd.DataFrame({'Religious groups': total_by_groups_harris.keys(), 'Dennett': total_by_groups_dennett.values(), 'Harris': total_by_groups_harris.values()})
+
+# df.plot(x="Religious groups", y=["Dennett", "Harris"], kind="bar")
+# plt.ylabel("Words"); 
+# plt.show()
 
 #(data_for_analysis_dennett, data_for_analysis_harris, groups, folder_name, should_be_positive, is_directly):
 #save_filtered_data(data_for_analysis_dennett, data_for_analysis_harris, all_christians, "about_all_christians_directly", True, True)
@@ -347,33 +425,54 @@ for folder_name in videos:
 # save_filtered_data(data_for_analysis_dennett, data_for_analysis_harris, all_religious_fundamentalists, "religious_fundamentalists_directly_negative", False, True)
 # save_filtered_data(data_for_analysis_dennett, data_for_analysis_harris, all_religious_fundamentalists, "religious_fundamentalists_indirectly_negative", False, False)
 
-print("Dennett:", len(counts_by_types_dennett))
-for about_people in counts_by_types_dennett:
-    print(about_people.group, counts_by_types_dennett[about_people])
+#print("Dennett:", len(counts_by_types_dennett))
+#for about_people in counts_by_types_dennett:
+#    print(about_people.group, counts_by_types_dennett[about_people])
 
 
-print("Harris:", len(counts_by_types_harris))
-for about_people in counts_by_types_harris:
-    print(about_people.group, counts_by_types_harris[about_people])
+#print("Harris:", len(counts_by_types_harris))
+#for about_people in counts_by_types_harris:
+#    print(about_people.group, counts_by_types_harris[about_people])
 
 
-for group in religious_groups:
-    print(group)
+#for group in religious_groups:
+#    print(group)
 
-print("Video types:")
+#print("Video types:")
 
-for video_type in video_types:
-    print(video_type)
+#for video_type in video_types:
+#    print(video_type)
 
-print("Direct audiences:")
-for audience in direct_audiences:
-    print(audience)
+#print("Direct audiences:")
+#for audience in direct_audiences:
+#    print(audience)
     
-print("Indirect audiences:")
-for audience in indirect_audiences:
-    print(audience)
+#print("Indirect audiences:")
+#for audience in indirect_audiences:
+#    print(audience)
 
-# For statistics on type, audiences
+
+# Years graph
+years = range(2003, 2027)
+samples_by_years_dennett = dict()
+for year in years:
+    samples_by_years_dennett[year] = []
+
+samples_by_years_harris = dict()
+for year in years:
+    samples_by_years_harris[year] = []
+
+religious_groups= ['About Christians', 'About Christian fundamentalists', 'About moderate Christians', 'About Christian preachers', 'About Christian theologians', \
+'About atheists', 'About nonreligious people', 'About secular people', 'About scientists, secularists and atheists', 'About scientists', 'About Christian preachers atheists', \
+'About Muslims', 'About Muslim fundamentalists', 'About moderate Muslims', 'About other religious people', 'About religious people', 'About religious fundamentalists', 'About religious moderates']
+
+samples_by_groups_dennett = dict()
+for group in religious_groups:
+     samples_by_groups_dennett[group[6:]] = []
+
+samples_by_groups_harris = dict()
+for group in religious_groups:
+     samples_by_groups_harris[group[6:]] = []
 
 for folder_name in videos:
     for data_segment_type in videos[folder_name].data_dennett:
@@ -386,6 +485,11 @@ for folder_name in videos:
         with open(str(".\data_for_statistics\\dennett\\") + str(label) + str(".txt"), "a") as file:
             file.write(videos[folder_name].data_dennett[data_segment_type])
 
+        if label not in samples_by_years_dennett[year]:
+            samples_by_years_dennett[year].append(label)
+        if label not in samples_by_groups_dennett[data_segment_type.group[6:]]:
+            samples_by_groups_dennett[data_segment_type.group[6:]].append(label)
+
     for data_segment_type in videos[folder_name].data_harris:
         year = videos[folder_name].date.year
         video_type = videos[folder_name].type
@@ -396,79 +500,123 @@ for folder_name in videos:
         with open(str(".\data_for_statistics\\harris\\") + str(label) + str(".txt"), "a") as file:
             file.write(videos[folder_name].data_harris[data_segment_type])
 
+        if label not in samples_by_years_harris[year]:
+            samples_by_years_harris[year].append(label)
+        if label not in samples_by_groups_harris[data_segment_type.group[6:]]:
+            samples_by_groups_harris[data_segment_type.group[6:]].append(label)
+
+
+# Years charts
+samples_by_years_dennett_for_chart = dict()
+for year in years:
+    samples_by_years_dennett_for_chart[year] = len(samples_by_years_dennett[year])
+
+samples_by_years_harris_for_chart = dict()
+for year in years:
+    samples_by_years_harris_for_chart[year] = len(samples_by_years_harris[year])
+
+df = pd.DataFrame({'Year': years, 'Dennett': samples_by_years_dennett_for_chart.values(), 'Harris': samples_by_years_harris_for_chart.values()})
+
+df.plot(x="Year", y=["Dennett", "Harris"], kind="bar")
+plt.ylabel("Samples"); 
+plt.show()
+
+# Groupd charts
+samples_by_groups_dennett_for_chart = dict()
+for group in religious_groups:
+    samples_by_groups_dennett_for_chart[group[6:]] = len(samples_by_groups_dennett[group[6:]])
+
+samples_by_groups_harris_for_chart = dict()
+for group in religious_groups:
+    samples_by_groups_harris_for_chart[group[6:]] = len(samples_by_groups_harris[group[6:]])
+
+df = pd.DataFrame({'Religious group': samples_by_groups_dennett_for_chart.keys(), 'Dennett': samples_by_groups_dennett_for_chart.values(), 'Harris': samples_by_groups_harris_for_chart.values()})
+
+df.plot(x="Religious group", y=["Dennett", "Harris"], kind="bar")
+plt.ylabel("Samples"); 
+plt.show()
 
 #Excel filters - direct comparison
-# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers")))
-# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About moderate Christians")+(E2:E212="About Christian theologians")))
+# =FILTER(E2:Q161, (G2:G161=TRUE)*((E2:E161="About Christians")+(E2:E161="About Christian fundamentalists")+(E2:E161="About Christian preachers")))
+# =FILTER(E2:Q161, (G2:G161=TRUE)*((E2:E161="About moderate Christians")+(E2:E161="About Christian theologians")))
 
-# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists")))
-# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people")))
-# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Christian preachers atheists")))
+# =FILTER(E2:Q161, (G2:G161=TRUE)*((E2:E161="About atheists")+(E2:E161="About nonreligious people")+(E2:E161="About Christian preachers atheists")))
+# =FILTER(E2:Q161, (G2:G161=TRUE)*((E2:E161="About scientists, secularists and atheists")+(E2:E161="About secular people")))
+# =FILTER(E2:Q161, (G2:G161=TRUE)*((E2:E161="About Christian preachers atheists")))
 
 #Excel filters - all comparison
 # All Christians
-# =FILTER(E2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
-# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+# =FILTER(E2:Q161, (E2:E161="About Christians")+(E2:E161="About Christian fundamentalists")+(E2:E161="About Christian preachers"))
+# =FILTER(E2:Q161, (E2:E161="About moderate Christians")+(E2:E161="About Christian theologians"))
 
 # All Atheists
-# =FILTER(E2:Q212, (E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists"))
-# =FILTER(E2:Q212, (E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people"))
-# =FILTER(E2:Q212, (E2:E212="About Christian preachers atheists"))
+# =FILTER(E2:Q161, (E2:E161="About atheists")+(E2:E161="About nonreligious people")+(E2:E161="About Christian preachers atheists"))
+# =FILTER(E2:Q161, (E2:E161="About scientists, secularists and atheists")+(E2:E161="About secular people"))
+# =FILTER(E2:Q161, (E2:E161="About Christian preachers atheists"))
+
+# All Atheists - nonreligious
+# =FILTER(E2:Q161, (E2:E161="About atheists"))
+
+# =FILTER(E2:Q161, (E2:E161="About nonreligious people")+(E2:E161="About Christian preachers atheists"))
+# =FILTER(E2:Q161, (E2:E161="About scientists, secularists and atheists")+(E2:E161="About secular people"))
 
 #Scientists
 # Scientists
-# =FILTER(E2:Q212, (E2:E212="About scientists"))
+# =FILTER(E2:Q161, (E2:E161="About scientists"))
 
 #Excel filters - all comparison
 # Christians commoners
-# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
+# =FILTER(E2:Q161, (E2:E161="About moderate Christians")+(E2:E161="About Christians")+(E2:E161="About Christian fundamentalists")+(E2:E161="About Christian preachers"))
 # Christian theologians
-# =FILTER(E2:Q212, (E2:E212="About Christian theologians"))
+# =FILTER(E2:Q161, (E2:E161="About Christian theologians"))
 
 # Other religious groups
-# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people"))
+# =FILTER(E2:Q161, (E2:E161="About Muslims")+(E2:E161="About moderate Muslims")+(E2:E161="About Muslim fundamentalists")+(E2:E161="About other religious people"))
 #
 # Filter Muslims
-# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists"))
+# =FILTER(E2:Q161, (E2:E161="About Muslims")+(E2:E161="About moderate Muslims")+(E2:E161="About Muslim fundamentalists"))
 
 # Filter all religious people
-# =FILTER(E2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
-# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
-# =FILTER(E2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people"))
-# =FILTER(E2:Q212, (E2:E212="About religious people")+(E2:E212="About religious fundamentalists")+(E2:E212="About religious moderates"))
+# =FILTER(E2:Q161, (E2:E161="About Christians")+(E2:E161="About Christian fundamentalists")+(E2:E161="About Christian preachers"))
+# =FILTER(E2:Q161, (E2:E161="About moderate Christians")+(E2:E161="About Christian theologians"))
+# =FILTER(E2:Q161, (E2:E161="About Muslims")+(E2:E161="About moderate Muslims")+(E2:E161="About Muslim fundamentalists")+(E2:E161="About other religious people"))
+# =FILTER(E2:Q161, (E2:E161="About religious people")+(E2:E161="About religious fundamentalists")+(E2:E161="About religious moderates"))
 
 # Filter all religious people direct
-# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers")))
-# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About moderate Christians")+(E2:E212="About Christian theologians")))
-# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people")))
-# =FILTER(E2:Q212, (G2:G212=TRUE)*((E2:E212="About religious people")+(E2:E212="About religious fundamentalists")+(E2:E212="About religious moderates")))
+# =FILTER(E2:Q161, (G2:G161=TRUE)*((E2:E161="About Christians")+(E2:E161="About Christian fundamentalists")+(E2:E161="About Christian preachers")))
+# =FILTER(E2:Q161, (G2:G161=TRUE)*((E2:E161="About moderate Christians")+(E2:E161="About Christian theologians")))
+# =FILTER(E2:Q161, (G2:G161=TRUE)*((E2:E161="About Muslims")+(E2:E161="About moderate Muslims")+(E2:E161="About Muslim fundamentalists")+(E2:E161="About other religious people")))
+# =FILTER(E2:Q161, (G2:G161=TRUE)*((E2:E161="About religious people")+(E2:E161="About religious fundamentalists")+(E2:E161="About religious moderates")))
 
 # Religious fundamentalists
-# =FILTER(E2:Q212, (E2:E212="About religious fundamentalists")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Muslim fundamentalists"))
+# =FILTER(E2:Q161, (E2:E161="About religious fundamentalists")+(E2:E161="About Christian fundamentalists")+(E2:E161="About Muslim fundamentalists"))
 
 # Religious moderates
-# =FILTER(E2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About moderate Muslims")+(E2:E212="About religious moderates"))
+# =FILTER(E2:Q161, (E2:E161="About moderate Christians")+(E2:E161="About moderate Muslims")+(E2:E161="About religious moderates"))
 
 # All the Christians for anova
-# =FILTER(A2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
-# =FILTER(A2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
+# =FILTER(A2:Q161, (E2:E161="About Christians")+(E2:E161="About Christian fundamentalists")+(E2:E161="About Christian preachers"))
+# =FILTER(A2:Q161, (E2:E161="About moderate Christians")+(E2:E161="About Christian theologians"))
 
 # All the atheists for anova
-# =FILTER(A2:Q212, (E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists"))
-# =FILTER(A2:Q212, (E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people"))
+# =FILTER(A2:Q161, (E2:E161="About atheists")+(E2:E161="About nonreligious people")+(E2:E161="About Christian preachers atheists"))
+# =FILTER(A2:Q161, (E2:E161="About scientists, secularists and atheists")+(E2:E161="About secular people"))
 
 # All the religious people for anova
-# =FILTER(A2:Q212, (E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers"))
-# =FILTER(A2:Q212, (E2:E212="About moderate Christians")+(E2:E212="About Christian theologians"))
-# =FILTER(A2:Q212, (E2:E212="About Muslims")+(E2:E212="About moderate Muslims")+(E2:E212="About Muslim fundamentalists")+(E2:E212="About other religious people"))
-# =FILTER(A2:Q212, (E2:E212="About religious people")+(E2:E212="About religious fundamentalists")+(E2:E212="About religious moderates"))
+# =FILTER(A2:Q161, (E2:E161="About Christians")+(E2:E161="About Christian fundamentalists")+(E2:E161="About Christian preachers"))
+# =FILTER(A2:Q161, (E2:E161="About moderate Christians")+(E2:E161="About Christian theologians"))
+# =FILTER(A2:Q161, (E2:E161="About Muslims")+(E2:E161="About moderate Muslims")+(E2:E161="About Muslim fundamentalists")+(E2:E161="About other religious people"))
+# =FILTER(A2:Q161, (E2:E161="About religious people")+(E2:E161="About religious fundamentalists")+(E2:E161="About religious moderates"))
 
 # scientists for anova
-# =FILTER(A2:Q212, (E2:E212="About scientists"))
+# =FILTER(A2:Q161, (E2:E161="About scientists"))
 
 # Direct Christians for anova
-# =FILTER(A2:Q212, (G2:G212=TRUE)*((E2:E212="About Christians")+(E2:E212="About Christian fundamentalists")+(E2:E212="About Christian preachers")))
-# =FILTER(A2:Q212, (G2:G212=TRUE)*((E2:E212="About moderate Christians")+(E2:E212="About Christian theologians")))
+# =FILTER(A2:Q161, (G2:G161=TRUE)*((E2:E161="About Christians")+(E2:E161="About Christian fundamentalists")+(E2:E161="About Christian preachers")))
+# =FILTER(A2:Q161, (G2:G161=TRUE)*((E2:E161="About moderate Christians")+(E2:E161="About Christian theologians")))
+
+
+
 
 
 #For Harris
@@ -489,6 +637,15 @@ for folder_name in videos:
 # All Atheists
 # =FILTER(E2:Q212, (E2:E212="About atheists")+(E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists"))
 # =FILTER(E2:Q212, (E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people"))
+# =FILTER(E2:Q212, (E2:E212="About Christian preachers atheists"))
+
+
+# All Atheists
+# =FILTER(E2:Q212, (E2:E212="About atheists"))
+
+# =FILTER(E2:Q212, (E2:E212="About nonreligious people")+(E2:E212="About Christian preachers atheists"))
+# =FILTER(E2:Q212, (E2:E212="About scientists, secularists and atheists")+(E2:E212="About secular people"))
+
 # =FILTER(E2:Q212, (E2:E212="About Christian preachers atheists"))
 
 #Scientists

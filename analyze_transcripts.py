@@ -42,3 +42,34 @@ for autor in autors:
         line_df = pd.concat([first_part, second_part], axis=1)
         output = pd.concat([output, line_df], sort=False)
         output.to_csv(OUT_CSV_PATH, index=False)
+
+# output = pd.DataFrame()
+# file_name = '2018-Informal debate-not an outspoken atheist-general live event-About Christians-False-False.txt'
+# full_path = os.path.join(str('data_for_statistics/harris/'), file_name)
+# # template_input = pd.read_csv(full_path, header=None)
+# # template_input.head()
+# template_input = pd.DataFrame([['roles']])
+# num_docs = len(template_input)
+# print(template_input)
+
+# DICT_TYPE = 'emfd'
+# PROB_MAP = 'single'
+# SCORE_METHOD = 'bow'
+# OUT_METRICS = 'sentiment'
+
+# segment_info_raw = file_name.split('.')[0]
+# segment_info = segment_info_raw.split('-')
+
+# first_part = pd.DataFrame([[segment_info[0], segment_info[1], segment_info[2], segment_info[3], segment_info[4], segment_info[5], segment_info[6]]])
+# second_part = score_docs(template_input,DICT_TYPE,PROB_MAP,SCORE_METHOD,OUT_METRICS,num_docs)
+# # is not positive
+# # if segment_info[5] == 'False':
+# #     second_part.loc[0,'care_sent'] *= -1
+# #     second_part.loc[0,'fairness_sent'] *= -1
+# #     second_part.loc[0,'loyalty_sent'] *= -1
+# #     second_part.loc[0,'authority_sent'] *= -1
+# #     second_part.loc[0,'sanctity_sent'] *= -1
+
+# line_df = pd.concat([first_part, second_part], axis=1)
+# output = pd.concat([output, line_df], sort=False)
+# output.to_csv('test_output_dennett.csv', index=False)
